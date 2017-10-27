@@ -1,6 +1,36 @@
 <?php
 include 'conn.php';
 
+// item对应的编号:
+// 男子100m   1
+// 男子200m   2
+// 男子400m   3
+// 男子800m   4
+// 男子1500m  5
+// 男子5000m  6
+// 男子110栏   7
+// 男子跳高     8
+// 男子三级跳远   9
+// 男子跳远     10
+// 男子铅球     11
+// 男子引体向上   12
+
+// 女子100m   13
+// 女子200m   14
+// 女子400m   15
+// 女子800m   16
+// 女子1500m  17
+// 女子3000m  18
+// 女子100栏   19
+// 女子跳高     20
+// 女子三级跳远       21
+// 女子跳远     22
+// 女子铅球     23
+// 女子仰卧起坐   24
+
+// 男子4x100m接力   25
+
+
 $name = $_POST['name'];
 $gender = $_POST['gender'];
 $student_id = $_POST['student_id'];
@@ -17,6 +47,7 @@ $msec = $_POST['msec'];
 $run_time = $_POST['run_time'];
 $distance = $_POST['distance'];
 $points = $_POST['points'];
+$flag = (isset($_POST['flag']))?$_POST['flag']:NULL; //接力赛代表，没有设为null
 
 // $name = '李智文';
 // $gender = '男';
