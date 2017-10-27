@@ -1,7 +1,7 @@
 <?php
 include 'conn.php';
 
-// item对应的编号:
+// 待定————item对应的编号:
 // 男子100m   1
 // 男子200m   2
 // 男子400m   3
@@ -56,7 +56,7 @@ $flag = (isset($_POST['flag']))?$_POST['flag']:NULL; //接力赛代表，没有�
 // $major = '软件工程';
 // $grade = '2016';
 // $class = '4';
-// $item = 11;
+// $item = '男子100米';
 // $zubie = 11;
 // $position = 11;
 // $minute = 11;
@@ -91,7 +91,7 @@ $sql = "INSERT INTO athlete(
     '{$major}',
     '{$grade}',
     '{$class}',
-    {$item},
+    '{$item}',
     {$zubie},
     {$position},
     {$minute},
