@@ -39,15 +39,7 @@ $major = $_POST['major'];
 $grade = $_POST['grade'];
 $class = $_POST['class'];
 $item = $_POST['item'];
-$zubie = $_POST['zubie'];
-$position = $_POST['position'];
-$minute = $_POST['minute'];
-$second = $_POST['second'];
-$msec = $_POST['msec'];
-$run_time = $_POST['run_time'];
-$distance = $_POST['distance'];
-$points = $_POST['points'];
-$flag = (isset($_POST['flag']))?$_POST['flag']:NULL; //接力赛代表，没有设为null
+$flag = 0; //接力赛代表，没有设为null
 
 // $name = '李智文';
 // $gender = '男';
@@ -65,7 +57,15 @@ $flag = (isset($_POST['flag']))?$_POST['flag']:NULL; //接力赛代表，没有�
 // $run_time = 3.1;
 // $distance = 2;
 // $points = 1;
-
+// $flag = 0;
+if($item == '男子4x100米'){
+$sql = "SELECT * FROM xuanshou WHERE item = '{$item}' AND class='{$class}'";
+$result = mysqli_query($conn, $sql);
+$num = mysqli_num_rows($result);
+if($num<1){
+    $flag=1;
+}
+}
 $sql = "INSERT INTO athlete(
     name,
     gender,
@@ -75,14 +75,7 @@ $sql = "INSERT INTO athlete(
     grade,
     class,
     item,
-    zubie,
-    position,
-    minute,
-    second,
-    msec,
-    run_time,
-    distance,
-    points
+    flag
 ) VALUES(
     '{$name}',
     '{$gender}',
@@ -92,14 +85,7 @@ $sql = "INSERT INTO athlete(
     '{$grade}',
     '{$class}',
     '{$item}',
-    {$zubie},
-    {$position},
-    {$minute},
-    {$second},
-    {$msec},
-    {$run_time},
-    {$distance},
-    {$points}
+    {$flag}
 )";
 
 $result = mysqli_query($conn, $sql);
