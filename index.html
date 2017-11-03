@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>2017院运会</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="stylesheet" href="css/bootstrap-select.min.css">
+</head>
+<body>
+<div class="page-header row">
+
+  	<ol class="breadcrumb col-md-6" style="text-align: center;">
+  		<li>华南农业大学</li>
+  		<li>数学与信息学院(软件学院)</li>
+  		<li>田径运动会</li>
+	</ol>
+
+</div>
+<div class="col-md-8 col-md-offset-2 ">
+	<ul id="Tabs" class="nav nav-tabs">
+  		<li role="presentation" class="active"><a href="#join" data-toggle="tab">报名</a></li>
+  		<li role="presentation"><a href="#sort" data-toggle="tab">分组</a></li>
+  		<li role="presentation"><a href="#grade" data-toggle="tab">录分</a></li>
+  		<li role="presentation"><a href="#rank" data-toggle="tab">排名</a></li>
+	</ul>
+	
+	<div id="TabsContent" class="tab-content" >
+
+		<div id="join" class="panel tab-pane fade in active">
+  			<div class="panel-body">
+   			<div class="input-group col-md-4 col-md-offset-4 ">
+  				<span class="input-group-addon" id="basic-addon1">姓名</span>
+  				<input id="name" type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group col-md-4 col-md-offset-4 ">
+  				<span class="input-group-addon" id="basic-addon1">学号</span>
+  				<input id="student_id" type="text" class="form-control" placeholder="number" aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group col-md-3 col-md-offset-4 ">
+  				<span class="input-group-addon " id="basic-addon1">性别</span>
+				<select class="selectpicker" data-width="100%" onchange="selectGender(this)" >
+  					<option>男</option>
+  					<option>女</option>
+				</select>		
+			</div>
+			<div class="input-group col-md-4 col-md-offset-4 ">
+  				<span class="input-group-addon" id="basic-addon1">联系方式</span>
+  				<input id="phone_number" type="text" class="form-control" placeholder="PhoneNumber" aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group col-md-6 col-md-offset-4 ">
+				<select  class="selectpicker" data-width="35%" onchange="selectMajor(this)" >
+  					<option value="计机">计算机科学与技术</option>
+					<option value="软工">软件工程</option>
+					<option value="软R">软件工程(软件学院)</option>
+					<option value="软温">软件工程温氏阿里创新班</option>
+					<option value="网工">网络工程</option>
+					<option value="信管">信息管理与信息管理系统</option>
+					<option value="信科">信息与计算科学</option>
+					<option value="工工">工业工程</option>
+					<option value="统计">统计学</option>
+					<option value="金数">金融数学</option>
+					<option value="应数">数学与应用数学</option>
+				</select>
+				<span class="input-group-addon " id="basic-addon1">专业</span>
+				<select class="selectpicker" data-width="30%" onchange="selectGrade(this)" >
+  					<option value="17" >17</option>
+  					<option value="16" >16</option>
+  					<option value="15" >15</option>
+  					<option value="14" >14</option>
+				</select>
+				<span class="input-group-addon " id="basic-addon1">级</span>
+				<select class="selectpicker" data-width="20%" onchange="selectClass(this)" >
+  					<option value="1" >1</option>
+  					<option value="2" >2</option>
+  					<option value="3" >4</option>
+  					<option value="4" >3</option>
+  					<option value="5" >5</option>
+  					<option value="6" >6</option>
+  					<option value="7" >7</option>
+  					<option value="8" >8</option>
+				</select>
+				<span class="input-group-addon " id="basic-addon1">班</span>
+			</div>
+			<div class="input-group col-md-4 col-md-offset-4 ">
+  				<span class="input-group-addon" id="basic-addon1">项目</span>
+  				<select class="selectpicker" data-width="35%" onchange="selectItem(this)" >
+  					<option value="1">男子100米</option>
+					<option value="2">男子200米</option>
+					<option value="3">男子400米</option>
+					<option value="4">男子800米</option>
+					<option value="5">男子1500米</option>
+					<option value="6">男子5000米</option>
+					<option value="7">男子110米栏</option>
+					<option value="8">男子跳高</option>
+					<option value="9">男子三级跳远</option>
+					<option value="10">男子铅球</option>
+					<option value="11">引体向上</option>
+					<option value="12">男子跳远</option>
+					<option value="13">女子100米</option>
+					<option value="14">女子200米</option>
+					<option value="15">女子400米</option>
+					<option value="16">女子800米</option>
+					<option value="17">女子1500米</option>
+					<option value="18">女子3000米</option>
+					<option value="19">女子110米栏</option>
+					<option value="20">女子跳高</option>
+					<option value="21">女子跳远</option>
+					<option value="22">女子三级跳远</option>
+					<option value="23">女子铅球</option>
+					<option value="24">仰卧起坐</option>
+					<option value="25">男子4x100米接力</option>
+				</select>
+			</div>
+			<div class="input-group col-md-2 col-md-offset-5 ">
+    			<button id="submit" type="button" class="btn btn-block btn-info ">提交</button>
+			</div>
+ 			</div>
+  		</div>
+		<div id="sort" class="tab-pane fade " >
+			<div class="panel panel-warning">
+  				<div class="panel-heading">
+  					<select  class="selectpicker" data-width="" onchange="showItem(this)" >
+  						<option value="0">选择项目</option>
+  						<option value="1">男子100米</option>
+						<option value="2">男子200米</option>
+						<option value="3">男子400米</option>
+						<option value="4">男子800米</option>
+						<option value="5">男子1500米</option>
+						<option value="6">男子5000米</option>
+						<option value="7">男子110米栏</option>
+						<option value="8">男子跳高</option>
+						<option value="9">男子三级跳远</option>
+						<option value="10">男子铅球</option>
+						<option value="11">引体向上</option>
+						<option value="12">男子跳远</option>
+						<option value="13">女子100米</option>
+						<option value="14">女子200米</option>
+						<option value="15">女子400米</option>
+						<option value="16">女子800米</option>
+						<option value="17">女子1500米</option>
+						<option value="18">女子3000米</option>
+						<option value="19">女子110米栏</option>
+						<option value="20">女子跳高</option>
+						<option value="21">女子跳远</option>
+						<option value="22">女子三级跳远</option>
+						<option value="23">女子铅球</option>
+						<option value="24">仰卧起坐</option>
+						<option value="25">男子4x100米接力</option>
+					</select>
+  				</div>
+  				<div class="panel-body">
+    				<table id="showTable" class="table table-bordered table-hover">
+ 						<thead>
+ 							<th>
+ 							<td>赛道1</td>
+ 							<td>赛道2</td>
+ 							<td>赛道3</td>
+ 							<td>赛道4</td>
+ 							<td>赛道5</td>
+ 							<td>赛道6</td>
+ 							<td>赛道7</td>
+ 							<td>赛道8</td>
+ 						</th>
+ 						</thead>
+ 						<tbody id="tb">
+ 							<tr>
+ 								<td>第1组</td>
+ 								<td>a</td>
+ 								<td>b</td>
+ 								<td>c</td>
+ 								<td>d</td>
+ 								<td>e</td>
+ 								<td>f</td>
+ 								<td>g</td>
+ 								<td></td>
+ 							</tr>
+ 							<tr></tr>
+ 							<tr></tr>
+ 							<tr></tr>
+ 							<tr></tr>
+ 							<tr></tr>
+ 							<tr></tr>
+ 							<tr></tr>
+ 						</tbody>
+					</table>
+  				</div>
+			</div>
+		</div>
+		<div id="grade" class="tab-pane fade">
+			<div class="panel panel-success">
+  				<div class="panel-heading">
+					<div class="input-group col-md-6  ">
+						<select id="gradeItem" class="selectpicker" data-width="30%" >
+							<option value="0">选择项目</option>
+  							<option value="1">男子100米</option>
+							<option value="2">男子200米</option>
+							<option value="3">男子400米</option>
+							<option value="4">男子800米</option>
+							<option value="5">男子1500米</option>
+							<option value="6">男子5000米</option>
+							<option value="7">男子110米栏</option>
+							<option value="8">男子跳高</option>
+							<option value="9">男子三级跳远</option>
+							<option value="10">男子铅球</option>
+							<option value="11">引体向上</option>
+							<option value="12">男子跳远</option>
+							<option value="13">女子100米</option>
+							<option value="14">女子200米</option>
+							<option value="15">女子400米</option>
+							<option value="16">女子800米</option>
+							<option value="17">女子1500米</option>
+							<option value="18">女子3000米</option>
+							<option value="19">女子110米栏</option>
+							<option value="20">女子跳高</option>
+							<option value="21">女子跳远</option>
+							<option value="22">女子三级跳远</option>
+							<option value="23">女子铅球</option>
+							<option value="24">仰卧起坐</option>
+							<option value="25">男子4x100米接力</option>
+						</select>
+						<select id="gradePosition"  class="selectpicker" data-width="20%" >
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+						</select>
+    					<button id="query" type="button" class="btn btn-info ">查询</button>
+					</div>
+  				</div>
+  				<div class="panel-body">
+  					<table id="gradeTable" class="table table-bordered table-hover">
+ 						<thead>
+ 							<th>
+ 							<td>赛道1</td>
+ 							<td>赛道2</td>
+ 							<td>赛道3</td>
+ 							<td>赛道4</td>
+ 							<td>赛道5</td>
+ 							<td>赛道6</td>
+ 							<td>赛道7</td>
+ 							<td>赛道8</td>
+ 						</th>
+ 						</thead>
+ 						<tbody id="tb">
+ 							<tr>
+ 								<td>第1组</td>
+ 								<td>a</td>
+ 								<td>b</td>
+ 								<td>c</td>
+ 								<td>d</td>
+ 								<td>e</td>
+ 								<td>f</td>
+ 								<td>g</td>
+ 								<td>h</td>
+ 							</tr>
+ 							<tr>
+ 								<td></td>
+ 								<td>
+ 									<input type="text" placeholder="分" style="width:45%;">
+ 									<input type="text" placeholder="秒" style="width:45%;">
+ 								</td>
+ 								<td>
+ 									<input type="text" placeholder="分" style="width:45%;">
+ 									<input type="text" placeholder="秒" style="width:45%;">
+ 								</td>
+ 								<td>
+ 									<input type="text" placeholder="分" style="width:45%;">
+ 									<input type="text" placeholder="秒" style="width:45%;">
+ 								</td>
+ 								<td>
+ 									<input type="text" placeholder="分" style="width:45%;">
+ 									<input type="text" placeholder="秒" style="width:45%;">
+ 								</td>
+ 								<td>
+ 									<input type="text" placeholder="分" style="width:45%;">
+ 									<input type="text" placeholder="秒" style="width:45%;">
+ 								</td>
+ 								<td>
+ 									<input type="text" placeholder="分" style="width:45%;">
+ 									<input type="text" placeholder="秒" style="width:45%;">
+ 								</td>
+ 								<td>
+ 									<input type="text" placeholder="分" style="width:45%;">
+ 									<input type="text" placeholder="秒" style="width:45%;">
+ 								</td>
+ 								<td>
+ 									<input type="text" placeholder="分" style="width:45%;">
+ 									<input type="text" placeholder="秒" style="width:45%;">
+ 								</td>
+ 							</tr>
+ 						</tbody>
+					</table>
+					<div class="input-group col-md-2 col-md-offset-5 ">
+    					<button id="submitGrade" type="button" class="btn btn-block btn-info ">提交</button>
+					</div>
+  				</div>
+  			</div>
+		</div>
+		<div id="rank" class="tab-pane fade">
+			
+		</div>
+	</div>
+</div>
+
+</div>
+	
+<script type="text/javascript" src="js/jquery-3.2.1.js" ></script>
+<script type="text/javascript" src="js/bootstrap.min.js" ></script>
+<script type="text/javascript" src="js/index.js" ></script>
+<script type="text/javascript" src="js/bootstrap-select.min.js" ></script>
+</body>
+</html>
