@@ -109,7 +109,7 @@ $("#query").click(function(){
 	var gradeItem = $("#gradeItem").selectpicker("val");
 	var gradePosition = $("#gradePosition").selectpicker("val");
 	$.get(
-		"php/",
+		"php/read.php",
 		{"item":gradeItem,"position":gradePosition},
 		function (data,status) {
 			
