@@ -1,40 +1,43 @@
 <?php
-include 'conn.php';
 
-function paiDao($item){
-    global $conn;
-    if($item==25){
-        $sql = "SELECT * FROM athlete WHERE item={$item} AND flag=1";
+class Paidao {
+
+    public function __construct(){
     }
-	else{
-        $sql = "SELECT * FROM athlete WHERE item={$item}";
+
+    public function run($item){
+        require_once 'conn.php';
+        if($item=='男子4x100米'){
+            $sql = "SELECT * FROM athlete WHERE item={$item} AND flag=1";
+        }
+        else{
+            $sql = "SELECT * FROM athlete WHERE item={$item}";
+        }
+        $result = mysqli_query($conn, $sql);
+        while($row = mysqli_fetch_assoc($result)){
+        $data[] = $row;
     }
-	$result = mysqli_query($conn, $sql);
-	while($row = mysqli_fetch_assoc($result)){
-		$data[] = $row;
-	}
-	$i=1;
-	$j=1;
-	if(!empty($data)){
-		shuffle($data);
-		foreach($data as $val){
-			if($j == 9){
-				$j=1;
-				$i++;
-			}
-			$sql = "UPDATE athlete SET zubie=$i, position=$j WHERE id={$val['id']}";
-			$result = mysqli_query($conn, $sql);
-			$j++;
-		}
-	}
+        $i=1; //组别
+        $j=1; //赛道
+        if(!empty($data)){
+            shuffle($data);
+            foreach($data as $val){
+            if($j == 9){
+                $j=1;
+                $i++;
+            }
+        $sql = "UPDATE athlete SET zubie=$i, position=$j WHERE id={$val['id']}";
+        $result = mysqli_query($conn, $sql);
+        $j++;
+        }
+    }
+
+    }
 }
 
-// $item=13;
-// while($item<=25){
-// 	paiDao($item);
-// 	$item++;
-// }
-paiDao(25);
+// $item = $_POST['item'];//输入项目名
 
-echo "OK";
+$fenzu = new Paidao();
+$fenzu->run('男子100米');//后面替换
+
 ?>

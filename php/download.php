@@ -58,9 +58,7 @@ $objPHPExcel->setActiveSheetIndex(0)
             ->setCellValue('B1', '专业')
             ->setCellValue('C1', '班级')
             ->setCellValue('D1', '姓名')
-            ->setCellValue('E1', '项目')
-            ->setCellValue('F1', '组别')
-            ->setCellValue('G1', '赛道');
+            ->setCellValue('E1', '项目');
 $i=2;
 while($row = mysqli_fetch_assoc($result)){
     $A = 'A'.$i;
@@ -68,8 +66,6 @@ while($row = mysqli_fetch_assoc($result)){
     $C = 'C'.$i;
     $D = 'D'.$i;
     $E = 'E'.$i;
-    $F = 'F'.$i;
-    $G = 'G'.$i;
     switch($row['item']){
         case 1: $item = '男子100米'; break;
         case 2: $item = '男子200米'; break;
@@ -102,9 +98,7 @@ while($row = mysqli_fetch_assoc($result)){
                 ->setCellValue($B, $row['major'])
                 ->setCellValue($C, $row['class'])
                 ->setCellValue($D, $row['name'])
-                ->setCellValue($E, $item)
-                ->setCellValue($F, $row['zubie'])
-                ->setCellValue($G, $row['position']);
+                ->setCellValue($E, $item);
     $i++;
 }
 

@@ -10,7 +10,7 @@ if($item == 25){
     $sql = "SELECT * FROM athlete WHERE item={$item} AND flag=1";
 }
 else{
-    $sql = "SELECT * FROM athlete WHERE item={$item} ORDER BY zubie, position";
+    $sql = "SELECT * FROM athlete WHERE item={$item} ORDER BY zubie";
 }
 
 $result = mysqli_query($conn, $sql);

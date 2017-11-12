@@ -43,44 +43,70 @@ $("#submit").click(function(){
 		return;
 	}
 	if(Phone_number==""){
-		alert("联系方式不能为空");
-		$("#phone_number").focus();
-		return;
+		//alert("联系方式不能为空");
+		//$("#phone_number").focus();
+		//return;
+		Phone_number = 0;
 	}
-	$.post(
-		"php/input.php",
-		{
-			"name":Name,"gender":Gender,"student_id":Student_id,"phone_number":Phone_number,
-			"major":Major,"grade":Grade,"class":Class,"item":Item 
-		},
-		function(data,status){
-			if(status=="success")
-				clearInput();
-				alert(data);
-		}
-	)
+	alert("禁止录入！");
+	// $.post(
+	// 	"php/input.php",
+	// 	{
+	// 		"name":Name,"gender":Gender,"student_id":Student_id,"phone_number":Phone_number,
+	// 		"major":Major,"grade":Grade,"class":Class,"item":Item 
+	// 	},
+	// 	function(data,status){
+	// 		if(status=="success")
+	// 			clearInput();
+	// 			//alert(data);
+	// 	}
+	// )
 })
 
 //分组页面
 function createContent(i,a1,a2,a3,a4,a5,a6,a7,a8){
 	var content = " <tr><td>第"+i+"组</td>";
-	if(a1!=null)
-	content += "<td>"+a1["name"]+"<br>"+a1["grade"]+a1["major"]+a1["class"]+"</td>";
-	if(a2!=null)
-	content += "<td>"+a2["name"]+"<br>"+a2["grade"]+a2["major"]+a2["class"]+"</td>";
-	if(a3!=null)
-	content += "<td>"+a3["name"]+"<br>"+a3["grade"]+a3["major"]+a3["class"]+"</td>";
-	if(a4!=null)
-	content += "<td>"+a4["name"]+"<br>"+a4["grade"]+a4["major"]+a4["class"]+"</td>";
-	if(a5!=null)
-	content += "<td>"+a5["name"]+"<br>"+a5["grade"]+a5["major"]+a5["class"]+"</td>";
-	if(a6!=null)
-	content += "<td>"+a6["name"]+"<br>"+a6["grade"]+a6["major"]+a6["class"]+"</td>";
-	if(a7!=null)
-	content += "<td>"+a7["name"]+"<br>"+a7["grade"]+a7["major"]+a7["class"]+"</td>";
-	if(a8!=null)
-	content += "<td>"+a8["name"]+"<br>"+a8["grade"]+a8["major"]+a8["class"]+"</td>";
-	content += "</tr>";
+	if(a1["item"]==25)
+	{
+		if(a1!=null)
+			content += "<td>"+a1["grade"]+a1["major"]+a1["class"]+"</td>";
+		if(a2!=null)
+			content += "<td>"+a2["grade"]+a2["major"]+a2["class"]+"</td>";
+		if(a3!=null)
+			content += "<td>"+a3["grade"]+a3["major"]+a3["class"]+"</td>";
+		if(a4!=null)
+			content += "<td>"+a4["grade"]+a4["major"]+a4["class"]+"</td>";
+		if(a5!=null)
+			content += "<td>"+a5["grade"]+a5["major"]+a5["class"]+"</td>";
+		if(a6!=null)
+			content += "<td>"+a6["grade"]+a6["major"]+a6["class"]+"</td>";
+		if(a7!=null)
+			content += "<td>"+a7["grade"]+a7["major"]+a7["class"]+"</td>";
+		if(a8!=null)
+			content += "<td>"+a8["grade"]+a8["major"]+a8["class"]+"</td>";
+		content += "</tr>";
+	}
+	else
+	{
+		if(a1!=null)
+			content += "<td>"+a1["name"]+"<br>"+a1["grade"]+a1["major"]+a1["class"]+"</td>";
+		if(a2!=null)
+			content += "<td>"+a2["name"]+"<br>"+a2["grade"]+a2["major"]+a2["class"]+"</td>";
+		if(a3!=null)
+			content += "<td>"+a3["name"]+"<br>"+a3["grade"]+a3["major"]+a3["class"]+"</td>";
+		if(a4!=null)
+			content += "<td>"+a4["name"]+"<br>"+a4["grade"]+a4["major"]+a4["class"]+"</td>";
+		if(a5!=null)
+			content += "<td>"+a5["name"]+"<br>"+a5["grade"]+a5["major"]+a5["class"]+"</td>";
+		if(a6!=null)
+			content += "<td>"+a6["name"]+"<br>"+a6["grade"]+a6["major"]+a6["class"]+"</td>";
+		if(a7!=null)
+			content += "<td>"+a7["name"]+"<br>"+a7["grade"]+a7["major"]+a7["class"]+"</td>";
+		if(a8!=null)
+			content += "<td>"+a8["name"]+"<br>"+a8["grade"]+a8["major"]+a8["class"]+"</td>";
+		content += "</tr>";
+	}
+
 	return content;
 }
 
@@ -99,20 +125,61 @@ function showItem(obj) {
 			 	var content = createContent(k++,a[i],a[i+1],a[i+2],a[i+3],a[i+4],a[i+5],a[i+6],a[i+7]);
 				$("#tb").append(content);
 			}
-			// alert(data);
 		}
 	)
 }
 
 //录分页面
-$("#query").click(function(){
-	var gradeItem = $("#gradeItem").selectpicker("val");
-	var gradePosition = $("#gradePosition").selectpicker("val");
-	$.get(
-		"php/read.php",
-		{"item":gradeItem,"position":gradePosition},
-		function (data,status) {
-			
+function addAthlete(i,a) {
+	var gradeAthlete = $("#gradeAthlete").find("td");
+	var gradeGrade = $("#gradeGrade").find("td");
+	gradeAthlete.eq(0).text("第"+i+"组");
+	for(var i=0;i<8;i++){
+		if(i<a.length)
+		{
+			gradeAthlete.eq(i+1).html(a[i]["name"]+"<br>"+a[i]["grade"]+a[i]["major"]+a[i]["class"]);
+			gradeGrade.eq(i+1).find("input").eq(0).val(a[i]["minute"]);
+			gradeGrade.eq(i+1).find("input").eq(1).val(a[i]["second"]);
 		}
+		else 
+		{
+			gradeAthlete.eq(i+1).html("");
+			gradeGrade.eq(i+1).find("input").eq(0).val("");
+			gradeGrade.eq(i+1).find("input").eq(1).val("");
+		}
+	}
+}
+
+$("#query").click(function(){
+	var gradeItemQuery = $("#gradeItemQuery").selectpicker("val");
+	var gradeGroupQuery = $("#gradeGroupQuery").selectpicker("val");
+	$.get(
+		"php/testG.php",
+		{"item":gradeItemQuery,"group":gradeGroupQuery},
+		function (data,status) {
+				var a = eval(data);
+				if(a==null)
+					alert("没有对应数据");
+				else
+					addAthlete(gradeGroupQuery,a);
+			}
+		)
+})
+$("#submitGrade").click(function(){
+	var item = $("#gradeItemQuery").selectpicker("val");
+	var group = $("#gradeGroupQuery").selectpicker("val");
+	var gradeGrade = $("#gradeGrade").find("td");
+	var grade = new Array();
+	for(var i=0;i<8;i++){
+		var minute = gradeGrade.eq(i+1).find("input").eq(0).val();
+		var second = gradeGrade.eq(i+1).find("input").eq(1).val();
+		grade[i] = new Array(minute,second);
+	}
+	$.post(
+		"php/testSubmit.php",
+		{"item":item,"group":group,"grade":grade},
+		function (data,status) {
+				alert(data);
+			}
 		)
 })
