@@ -16,36 +16,41 @@
 	 ps:
 	 	我这里成绩用的是minute里的数据，不知道对于田赛会怎么样
  */
+ 
+$item = $_GET['item'];
+$i=0;
 
-	  $arr0 = array(
-				array("zubie"=>1,"name"=>"ben","major"=>"计机","class"=>1,"grade"=>17,"minute"=>16.6,"second"=>0.66),
-				array("zubie"=>1,"name"=>"ooo","major"=>"计机","class"=>2,"grade"=>17,"minute"=>16.6,"second"=>0.66),
-				array("zubie"=>1,"name"=>"xxx","major"=>"计机","class"=>3,"grade"=>17,"minute"=>16.6,"second"=>0.66),
-				array("zubie"=>1,"name"=>"yyy","major"=>"计机","class"=>4,"grade"=>17,"minute"=>16.6,"second"=>0.66),
-				array("zubie"=>1,"name"=>"ben","major"=>"计机","class"=>1,"grade"=>17,"minute"=>16.6,"second"=>0.66),
-				array("zubie"=>1,"name"=>"ooo","major"=>"计机","class"=>2,"grade"=>17,"minute"=>16.6,"second"=>0.66),
-				array("zubie"=>1,"name"=>"xxx","major"=>"计机","class"=>3,"grade"=>17,"minute"=>16.6,"second"=>0.66),
-				array("zubie"=>1,"name"=>"yyy","major"=>"计机","class"=>4,"grade"=>17,"minute"=>16.6,"second"=>0.66),
+require_once 'conn.php';
+// 田赛
+if($item<=7 || ($item>=13 && $item<=18) || $item==25){
+	$sql = "SELECT zubie, name, major, class, grade, run_time FROM athlete WHERE item=? ORDER BY run_time ASC";
+}
+// 跳高跳远、铅球
+else if($item<=10 || $item==12 || ($item>=20 && $item<=23)){
+	$sql = "SELECT zubie, name, major, class, grade, distance FROM athlete WHERE item=? ORDER BY distance DESC";
+}
+// 引体向上、仰卧起坐
+else{
+	$sql = "SELECT zubie, name, major, class, grade, points FROM athlete WHERE item=? ORDER BY points DESC";
+}
 
-				array("zubie"=>2,"name"=>"ben","major"=>"计机","class"=>1,"grade"=>17,"minute"=>16.6,"second"=>0.66),
-				array("zubie"=>2,"name"=>"ooo","major"=>"计机","class"=>2,"grade"=>17,"minute"=>16.6,"second"=>0.66),
-				array("zubie"=>2,"name"=>"xxx","major"=>"计机","class"=>3,"grade"=>17,"minute"=>16.6,"second"=>0.66),
-				array("zubie"=>2,"name"=>"yyy","major"=>"计机","class"=>4,"grade"=>17,"minute"=>16.6,"second"=>0.66),
-				array("zubie"=>2,"name"=>"ben","major"=>"计机","class"=>1,"grade"=>17,"minute"=>16.6,"second"=>0.66),
-				array("zubie"=>2,"name"=>"ooo","major"=>"计机","class"=>2,"grade"=>17,"minute"=>16.6,"second"=>0.66),
-				array("zubie"=>2,"name"=>"xxx","major"=>"计机","class"=>3,"grade"=>17,"minute"=>16.6,"second"=>0.66),
-				array("zubie"=>2,"name"=>"yyy","major"=>"计机","class"=>4,"grade"=>17,"minute"=>16.6,"second"=>0.66),
-	);
+$stmt = mysqli_stmt_init($conn);
+mysqli_stmt_prepare($stmt, $sql);
+mysqli_stmt_bind_param($stmt, "i", $item);
+mysqli_stmt_execute($stmt);
+mysqli_stmt_bind_result($stmt, $zubie, $name, $major, $class, $grade, $result);
+while(mysqli_stmt_fetch($stmt)){
+	$arr[$i]['zubie'] = $zubie;
+	$arr[$i]['name'] = $name;
+	$arr[$i]['major'] = $major;
+	$arr[$i]['class'] = $class;
+	$arr[$i]['grade'] = $grade;
+	$arr[$i]['minute'] = ($result==NULL) ? 0 : $result;
+	$arr[$i]['second'] = 0;
+	$i++;
+}
+mysqli_stmt_close($stmt);
 
-$arr1 =array(
-			array("zubie"=>3,"name"=>"ooo","major"=>"计机","class"=>2,"grade"=>17,"minute"=>16.6,"second"=>0.66),
-			array("zubie"=>3,"name"=>"xxx","major"=>"计机","class"=>3,"grade"=>17,"minute"=>16.6,"second"=>0.66),
-			array("zubie"=>3,"name"=>"yyy","major"=>"计机","class"=>4,"grade"=>17,"minute"=>16.6,"second"=>0.66),
-	);
-
-if($_GET["item"]==1)
-	$arr = $arr0;
-else $arr = $arr1;
-
+$arr = (isset($arr)) ? $arr : NULL;
 echo json_encode($arr);
 ?>

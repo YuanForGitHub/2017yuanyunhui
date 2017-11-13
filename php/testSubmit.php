@@ -59,5 +59,5 @@
 
 
 	mysqli_stmt_close($stmt);
-	echo "完全O蛇皮棒棒K";
+	echo "完全 O 蛇皮螺旋升天棒棒 K ~~~φ(>ω<*) ";
 ?>
