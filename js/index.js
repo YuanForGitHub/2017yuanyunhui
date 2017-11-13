@@ -66,7 +66,7 @@ $("#submit").click(function(){
 //分组页面
 function createContent(i,a1,a2,a3,a4,a5,a6,a7,a8){
 	var content = " <tr><td>第"+i+"组</td>";
-	if(a1["item"]==25)
+	if(a1["item"]=="25")
 	{
 		if(a1!=null)
 			content += "<td>"+a1["grade"]+a1["major"]+a1["class"]+"</td>";
@@ -150,9 +150,27 @@ function addAthlete(i,a) {
 	}
 }
 
-$("#query").click(function(){
+$("#gradeQuery").click(function(){
 	var gradeItemQuery = $("#gradeItemQuery").selectpicker("val");
 	var gradeGroupQuery = $("#gradeGroupQuery").selectpicker("val");
+	var t = $("#gradeGrade");
+	if(gradeItemQuery=="8"||gradeItemQuery=="9"||gradeItemQuery=="10"
+		||gradeItemQuery=="12"||gradeItemQuery=="20"||gradeItemQuery=="21"
+		||gradeItemQuery=="22"||gradeItemQuery=="23")
+	{
+		t.find("input:even").attr("placeholder","米");
+		t.find("input:odd").attr("placeholder","不填");
+	}
+	else if(gradeItemQuery=="11"||gradeItemQuery=="24")
+	{
+		t.find("input:even").attr("placeholder","个");
+		t.find("input:odd").attr("placeholder","不填");
+	}
+	else 
+	{
+		t.find("input:even").attr("placeholder","分");
+		t.find("input:odd").attr("placeholder","秒");
+	}
 	$.get(
 		"php/testG.php",
 		{"item":gradeItemQuery,"group":gradeGroupQuery},
@@ -180,6 +198,36 @@ $("#submitGrade").click(function(){
 		{"item":item,"group":group,"grade":grade},
 		function (data,status) {
 				alert(data);
+			}
+		)
+})
+
+//排名页面
+function createAthlete(i,a,item) {
+	var c0 = "<tr><td>第"+(i+1)+"名</td>";
+	var c1 = "<td>"+a["name"]+"<br>"+a["grade"]+a["major"]+a["class"]+"</td>";
+	var c2 = "<td>"+a["minute"]+"</td></tr>";
+	return c0+c1+c2;
+}
+function rankList(a,item) {
+	var list;
+	for(var i=0;i<a.length;i++){
+		list += createAthlete(i,a[i],item);
+	}
+	$("#rankList").html(list);
+}
+
+$("#rankQuery").click(function(){
+	var item = $("#rankItemQuery").selectpicker("val");
+	$.get(
+		"php/rank.php",
+		{"item":item},
+		function (data,status) {
+				var a = eval(data);
+				if(a==null)
+					alert("没有对应数据");
+				else
+					rankList(a,item);
 			}
 		)
 })

@@ -240,7 +240,7 @@
 							<option value="18">18</option>
 							<option value="19">19</option>
 						</select>
-    					<button id="query" type="button" class="btn btn-info ">查询</button>
+    					<button id="gradeQuery" type="button" class="btn btn-info ">查询</button>
 					</div>
   				</div>
   				<div class="panel-body">
@@ -313,7 +313,67 @@
   			</div>
 		</div>
 		<div id="rank" class="tab-pane fade">
-			
+			<div class="panel panel-danger">
+  				<div class="panel-heading">
+					<div class="input-group col-md-6  ">
+						<select id="rankItemQuery" class="selectpicker" data-width="30%" >
+							<option value="0">选择项目</option>
+  							<option value="1">男子100米</option>
+							<option value="2">男子200米</option>
+							<option value="3">男子400米</option>
+							<option value="4">男子800米</option>
+							<option value="5">男子1500米</option>
+							<option value="6">男子5000米</option>
+							<option value="7">男子110米栏</option>
+							<option value="8">男子跳高</option>
+							<option value="9">男子三级跳远</option>
+							<option value="10">男子铅球</option>
+							<option value="11">引体向上</option>
+							<option value="12">男子跳远</option>
+							<option value="13">女子100米</option>
+							<option value="14">女子200米</option>
+							<option value="15">女子400米</option>
+							<option value="16">女子800米</option>
+							<option value="17">女子1500米</option>
+							<option value="18">女子3000米</option>
+							<option value="19">女子100米栏</option>
+							<option value="20">女子跳高</option>
+							<option value="21">女子跳远</option>
+							<option value="22">女子三级跳远</option>
+							<option value="23">女子铅球</option>
+							<option value="24">仰卧起坐</option>
+							<option value="25">男子4x100米接力</option>
+						</select>
+    					<button id="rankQuery" type="button" class="btn btn-info ">查询</button>
+					</div>
+  				</div>
+  				<div class="panel-body">
+  					<table id="gradeTable" class="table table-bordered table-hover">
+ 						<thead>
+ 							<th></th>
+ 							<th>运动员</th>
+ 							<th>成绩</th>
+ 						</thead>
+ 						<tbody id="rankList">
+ 							<tr>
+ 								<td>第1名</td>
+ 								<td>华农快男<br>16网工</td>
+ 								<td>6.66</td>
+ 							</tr>
+ 							<tr>
+ 								<td>第2名</td>
+ 								<td>邓老板</td>
+ 								<td>6.67</td>
+ 							</tr>
+ 							<tr>
+ 								<td>第3名</td>
+ 								<td>旺仔</td>
+ 								<td>6.68</td>
+ 							</tr>
+ 						</tbody>
+					</table>
+  				</div>
+  			</div>
 		</div>
 	</div>
 </div>
