@@ -48,7 +48,7 @@
 	// 引体向上
 	else{
 		$sql = "UPDATE athlete SET points=? WHERE item=? AND zubie=? AND position=?";
-		$stmt = mysqli_stmt_prepare($stmt, $sql);
+		mysqli_stmt_prepare($stmt, $sql);
 		foreach($grade as $val){
 			if($val[0]==NULL) break;
 			mysqli_stmt_bind_param($stmt, "iiii", $val[0], $item, $zubie, $i);
@@ -59,5 +59,5 @@
 
 
 	mysqli_stmt_close($stmt);
-	echo "完全 O 蛇皮螺旋升天棒棒 K ~~~φ(>ω<*) ";
+	echo "完全 O 蛇皮螺旋升天棒棒 K ~~~φ(>ω<*) ".$conn->error;
 ?>
