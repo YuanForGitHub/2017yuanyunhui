@@ -231,3 +231,9 @@ $("#rankQuery").click(function(){
 			}
 		)
 })
+
+//导出
+$("#downloadButton").click(function(){
+	var item = $("#downloadItem").selectpicker("val");
+	location = "php/download.php?item="+item;
+})

@@ -1,5 +1,4 @@
 <?php
-include 'conn.php';
 /**
  * PHPExcel
  *
@@ -51,14 +50,22 @@ $objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
 							 ->setKeywords("office 2007 openxml php")
 							 ->setCategory("Test result file");
 
-$sql = "SELECT * FROM athlete ORDER BY grade, major, class";
+require_once 'conn.php';
+$item = $_GET['item'];
+if($item==0)
+    $sql = "SELECT grade, major, class, name, item, zubie, position, run_time, distance, points FROM athlete";
+else
+    $sql = "SELECT grade, major, class, name, item, zubie, position, run_time, distance, points FROM athlete WHERE item={$item}";
 $result = mysqli_query($conn, $sql);
 $objPHPExcel->setActiveSheetIndex(0)
             ->setCellValue('A1', '年级')
             ->setCellValue('B1', '专业')
             ->setCellValue('C1', '班级')
             ->setCellValue('D1', '姓名')
-            ->setCellValue('E1', '项目');
+            ->setCellValue('E1', '项目')
+            ->setCellValue('F1', '小组')
+            ->setCellValue('G1', '赛道')
+            ->setCellValue('H1', '成绩');
 $i=2;
 while($row = mysqli_fetch_assoc($result)){
     $A = 'A'.$i;
@@ -66,44 +73,61 @@ while($row = mysqli_fetch_assoc($result)){
     $C = 'C'.$i;
     $D = 'D'.$i;
     $E = 'E'.$i;
+    $F = 'F'.$i;
+    $G = 'G'.$i;
+    $H = 'H'.$i;
     switch($row['item']){
-        case 1: $item = '男子100米'; break;
-        case 2: $item = '男子200米'; break;
-        case 3: $item = '男子400米'; break;
-        case 4: $item = '男子800米'; break;
-        case 5: $item = '男子1500米'; break;
-        case 6: $item = '男子5000米'; break;
-        case 7: $item = '男子110栏'; break;
-        case 8: $item = '男子跳高'; break;
-        case 9: $item = '男子三级跳远'; break;
-        case 10: $item = '男子铅球'; break;
-        case 11: $item = '引体向上'; break;
-        case 12: $item = '男子跳远'; break;
-        case 13: $item = '女子100米'; break;
-        case 14: $item = '女子200米'; break;
-        case 15: $item = '女子400米'; break;
-        case 16: $item = '女子800米'; break;
-        case 17: $item = '女子1500米'; break;
-        case 18: $item = '女子3000米'; break;
-        case 19: $item = '女子100米栏'; break;
-        case 20: $item = '女子跳高'; break;
-        case 21: $item = '女子跳远'; break;
-        case 22: $item = '女子三级跳远'; break;
-        case 23: $item = '女子铅球'; break;
-        case 24: $item = '仰卧起坐'; break;
-        case 25: $item = '男子4x100m接力'; break;
+        case 1: $item = '男子100米'; $score = ($row['run_time']==NULL) ? 0 : $row['run_time']; break;
+        case 2: $item = '男子200米'; $score = ($row['run_time']==NULL) ? 0 : $row['run_time']; break;
+        case 3: $item = '男子400米'; $score = ($row['run_time']==NULL) ? 0 : $row['run_time']; break;
+        case 4: $item = '男子800米'; $score = ($row['run_time']==NULL) ? 0 : $row['run_time']; break;
+        case 5: $item = '男子1500米'; $score = ($row['run_time']==NULL) ? 0 : $row['run_time']; break;
+        case 6: $item = '男子5000米'; $score = ($row['run_time']==NULL) ? 0 : $row['run_time']; break;
+        case 7: $item = '男子110栏'; $score = ($row['run_time']==NULL) ? 0 : $row['run_time']; break;
+        case 8: $item = '男子跳高'; $score = ($row['distance']==NULL) ? 0 : $row['distance']; break;
+        case 9: $item = '男子三级跳远'; $score = ($row['distance']==NULL) ? 0 : $row['distance']; break;
+        case 10: $item = '男子铅球'; $score = ($row['distance']==NULL) ? 0 : $row['distance']; break;
+        case 11: $item = '引体向上'; $score = ($row['points']==NULL) ? 0 : $row['points']; break;
+        case 12: $item = '男子跳远'; $score = ($row['distance']==NULL) ? 0 : $row['distance']; break;
+        case 13: $item = '女子100米'; $score = ($row['run_time']==NULL) ? 0 : $row['run_time']; break;
+        case 14: $item = '女子200米'; $score = ($row['run_time']==NULL) ? 0 : $row['run_time']; break;
+        case 15: $item = '女子400米'; $score = ($row['run_time']==NULL) ? 0 : $row['run_time']; break;
+        case 16: $item = '女子800米'; $score = ($row['run_time']==NULL) ? 0 : $row['run_time']; break;
+        case 17: $item = '女子1500米'; $score = ($row['run_time']==NULL) ? 0 : $row['run_time']; break;
+        case 18: $item = '女子3000米'; $score = ($row['run_time']==NULL) ? 0 : $row['run_time']; break;
+        case 19: $item = '女子100米栏'; $score = ($row['run_time']==NULL) ? 0 : $row['run_time']; break;
+        case 20: $item = '女子跳高'; $score = ($row['distance']==NULL) ? 0 : $row['distance']; break;
+        case 21: $item = '女子跳远'; $score = ($row['distance']==NULL) ? 0 : $row['distance']; break;
+        case 22: $item = '女子三级跳远'; $score = ($row['distance']==NULL) ? 0 : $row['distance']; break;
+        case 23: $item = '女子铅球'; $score = ($row['distance']==NULL) ? 0 : $row['distance']; break;
+        case 24: $item = '仰卧起坐'; $score = ($row['points']==NULL) ? 0 : $row['points']; break;
+        case 25: $item = '男子4x100m接力'; $score = ($row['run_time']==NULL) ? 0 : $row['run_time']; break;
     }
     $objPHPExcel->setActiveSheetIndex(0)
                 ->setCellValue($A, $row['grade'])
                 ->setCellValue($B, $row['major'])
                 ->setCellValue($C, $row['class'])
                 ->setCellValue($D, $row['name'])
-                ->setCellValue($E, $item);
+                ->setCellValue($E, $item)
+                ->setCellValue($F, $row['zubie'])
+                ->setCellValue($G, $row['position'])
+                ->setCellValue($H, $score);
     $i++;
 }
+// Add some data
+// $objPHPExcel->setActiveSheetIndex(0)
+//             ->setCellValue('A1', 'Hello')
+//             ->setCellValue('B2', 'world!')
+//             ->setCellValue('C1', 'Hello')
+//             ->setCellValue('D2', 'world!');
+
+// Miscellaneous glyphs, UTF-8
+// $objPHPExcel->setActiveSheetIndex(0)
+//             ->setCellValue('A4', 'Miscellaneous glyphs')
+//             ->setCellValue('A5', 'éàèùâêîôûëïüÿäöüç');
 
 // Rename worksheet
-$objPHPExcel->getActiveSheet()->setTitle('运动员名单');
+$objPHPExcel->getActiveSheet()->setTitle('数据');
 
 
 // Set active sheet index to the first sheet, so Excel opens this as the first sheet
@@ -112,7 +136,7 @@ $objPHPExcel->setActiveSheetIndex(0);
 
 // Redirect output to a client’s web browser (Excel2007)
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment;filename="2017数学与信息学院 软件院运会(核对).xlsx"');
+header('Content-Disposition: attachment;filename="2017数学与信息学院、软件学院-运动会数据备份.xlsx"');
 header('Cache-Control: max-age=0');
 // If you're serving to IE 9, then the following may be needed
 header('Cache-Control: max-age=1');
@@ -126,6 +150,3 @@ header ('Pragma: public'); // HTTP/1.0
 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 $objWriter->save('php://output');
 exit;
-
-
-?>
