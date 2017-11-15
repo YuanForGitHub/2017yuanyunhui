@@ -40,12 +40,13 @@ mysqli_stmt_bind_param($stmt, "i", $item);
 mysqli_stmt_execute($stmt);
 mysqli_stmt_bind_result($stmt, $zubie, $name, $major, $class, $grade, $result);
 while(mysqli_stmt_fetch($stmt)){
+	if($result==0 || $result==NULL) continue;
 	$arr[$i]['zubie'] = $zubie;
 	$arr[$i]['name'] = $name;
 	$arr[$i]['major'] = $major;
 	$arr[$i]['class'] = $class;
 	$arr[$i]['grade'] = $grade;
-	$arr[$i]['minute'] = ($result==NULL) ? 0 : $result;
+	$arr[$i]['minute'] = $result;
 	$arr[$i]['second'] = 0;
 	$i++;
 }

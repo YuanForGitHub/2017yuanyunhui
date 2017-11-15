@@ -33,8 +33,8 @@ if($item<=7 || ($item>=13 && $item<=18) || $item==25)
 		$arr[$i]['major'] = $row['major'];
 		$arr[$i]['class'] = $row['class'];
 		$arr[$i]['grade'] = $row['grade'];
-		$arr[$i]['minute'] = ($row['minute']==NULL) ? 0 : $row['minute'];
-		$arr[$i]['second'] = ($row['second']==NULL) ? 0 : $row['second'];
+		$arr[$i]['minute'] = ($row['minute']==0) ? NULL : $row['minute'];
+		$arr[$i]['second'] = ($row['second']==0) ? NULL : $row['second'];
 		$i++;
 	}
 // 跳高跳远、铅球
@@ -45,7 +45,7 @@ else if($item<=10 || $item==12 || ($item>=20 && $item<=23))
 		$arr[$i]['major'] = $row['major'];
 		$arr[$i]['class'] = $row['class'];
 		$arr[$i]['grade'] = $row['grade'];
-		$arr[$i]['minute'] = ($row['distance']==NULL) ? 0 : $row['distance'];
+		$arr[$i]['minute'] = ($row['distance']==0) ? NULL : $row['distance'];
 		$i++;
 	}
 // 引体向上
@@ -56,7 +56,7 @@ else
 		$arr[$i]['major'] = $row['major'];
 		$arr[$i]['class'] = $row['class'];
 		$arr[$i]['grade'] = $row['grade'];
-		$arr[$i]['minute'] = ($row['points']==NULL) ? 0 : $row['points'];
+		$arr[$i]['minute'] = ($row['points']==0) ? NULL : $row['points'];
 		$i++;
 	}
 
