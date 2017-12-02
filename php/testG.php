@@ -26,7 +26,7 @@ $result = mysqli_query($conn, $sql);
 $i=0;
 
 // 田赛
-if($item<=7 || ($item>=13 && $item<=18) || $item==25)
+if($item<=7 || ($item>=13 && $item<=19) || $item==25)
 	while($row = mysqli_fetch_assoc($result)){
 		$arr[$i]['zubie'] = $row['zubie'];
 		$arr[$i]['name'] = $row['name'];

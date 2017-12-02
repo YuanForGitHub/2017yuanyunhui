@@ -23,11 +23,10 @@
 	$stmt = mysqli_stmt_init($conn);
 	$i=1; // 赛道
 	// 田赛
-	if($item<=7 || ($item>=13 && $item<=18) || $item==25){
+	if($item<=7 || ($item>=13 && $item<=19) || $item==25){
 		$sql = "UPDATE athlete SET minute=?, second=?, run_time=? WHERE item=? AND zubie=? AND position=?";
 		mysqli_stmt_prepare($stmt, $sql);
 		foreach($grade as $val){
-			if($val[0]==NULL) break;
 			$run_time = $val[0]*60 + $val[1];
 			mysqli_stmt_bind_param($stmt, "iddiii", $val[0], $val[1], $run_time, $item, $zubie, $i);
 			mysqli_stmt_execute($stmt);
@@ -39,7 +38,6 @@
 		$sql = "UPDATE athlete SET distance=? WHERE item=? AND zubie=? AND position=?";
 		mysqli_stmt_prepare($stmt, $sql);
 		foreach($grade as $val){
-			if($val[0]==NULL) break;
 			mysqli_stmt_bind_param($stmt, "diii", $val[0], $item, $zubie, $i);
 			mysqli_stmt_execute($stmt);
 			$i++;
@@ -50,7 +48,6 @@
 		$sql = "UPDATE athlete SET points=? WHERE item=? AND zubie=? AND position=?";
 		mysqli_stmt_prepare($stmt, $sql);
 		foreach($grade as $val){
-			if($val[0]==NULL) break;
 			mysqli_stmt_bind_param($stmt, "iiii", $val[0], $item, $zubie, $i);
 			mysqli_stmt_execute($stmt);
 			$i++;

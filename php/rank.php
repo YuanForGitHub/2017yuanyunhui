@@ -22,7 +22,7 @@ $i=0;
 
 require_once 'conn.php';
 // 田赛
-if($item<=7 || ($item>=13 && $item<=18) || $item==25){
+if($item<=7 || ($item>=13 && $item<=19) || $item==25){
 	$sql = "SELECT zubie, name, major, class, grade, run_time FROM athlete WHERE item=? ORDER BY run_time ASC";
 }
 // 跳高跳远、铅球
